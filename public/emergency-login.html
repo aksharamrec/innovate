@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emergency Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    button {
+      padding: 10px 15px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+    pre {
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 4px;
+      overflow: auto;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Emergency Login</h1>
+  <p>Use this page to log in directly with the test user if normal login is not working.</p>
+  
+  <button id="login-btn">Login as Test User</button>
+  <button id="check-btn">Check Auth Status</button>
+  <button id="goto-home">Go to Home Page</button>
+
+  <div class="result" id="result">
+    Result will appear here
+  </div>
+
+  <script>
+    document.getElementById('login-btn').addEventListener('click', async () => {
+      const result = document.getElementById('result');
+      result.innerHTML = 'Logging in...';
+      
+      try {
+        // Use test user credentials
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: 'user@example.com',
+            password: 'password123'
+          })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          // Save auth data to localStorage
+          localStorage.setItem('auth_token', data.token);
+          localStorage.setItem('user_data', JSON.stringify(data.user));
+          
+          result.innerHTML = `
+            <p>Login successful!</p>
+            <p>Token: ${data.token ? data.token.substring(0, 20) + '...' : 'None'}</p>
+            <p>User: ${JSON.stringify(data.user, null, 2)}</p>
+          `;
+        } else {
+          result.innerHTML = `Error: ${data.message || 'Login failed'}`;
+        }
+      } catch (error) {
+        result.innerHTML = `Error: ${error.message}`;
+        console.error(error);
+      }
+    });
+    
+    document.getElementById('check-btn').addEventListener('click', () => {
+      const result = document.getElementById('result');
+      const token = localStorage.getItem('auth_token');
+      const userData = localStorage.getItem('user_data');
+      
+      result.innerHTML = `
+        <p>Auth Token: ${token ? 'Exists' : 'Not found'}</p>
+        <p>User Data: ${userData ? 'Exists' : 'Not found'}</p>
+        <pre>${userData ? JSON.stringify(JSON.parse(userData), null, 2) : ''}</pre>
+      `;
+    });
+    
+    document.getElementById('goto-home').addEventListener('click', () => {
+      // Make sure we're redirecting to the correct path
+      window.location.href = 'home.html'; // NOT html/home.html
+    });
+  </script>
+</body>
+</html>

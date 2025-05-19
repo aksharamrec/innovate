@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direct Access - Innovate</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #4338ca;
+    }
+    .card {
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin: 20px 0;
+      background: #f9f9f9;
+    }
+    button {
+      background: #4338ca;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px;
+      display: block;
+      width: 100%;
+    }
+    button.secondary {
+      background: #6b7280;
+    }
+    button.danger {
+      background: #ef4444;
+    }
+  </style>
+  <script>
+    // Force authentication immediately
+    const defaultUser = {
+      id: '1',
+      name: 'John Doe',
+      username: 'johndoe',
+      email: 'user@example.com',
+      avatar: null,
+      stats: {
+        posts: 15,
+        following: 124,
+        followers: 89
+      }
+    };
+    
+    localStorage.setItem('auth_token', 'direct-token-' + Date.now());
+    localStorage.setItem('user_data', JSON.stringify(defaultUser));
+    sessionStorage.clear();
+  </script>
+</head>
+<body>
+  <h1>Innovate - Direct Access</h1>
+  <p>This page provides direct access to key pages without authentication checks.</p>
+  
+  <div class="card">
+    <h2>Quick Access</h2>
+    <button onclick="window.location.href='home.html?bypass=true&t='+Date.now()">Go to Home Page</button>
+    <button onclick="window.location.href='profile.html?bypass=true&t='+Date.now()">Go to Profile</button>
+    <button onclick="window.location.href='messages.html?bypass=true&t='+Date.now()">Go to Messages</button>
+  </div>
+  
+  <div class="card">
+    <h2>Auth Management</h2>
+    <button onclick="forceLogin()" class="secondary">Force Login</button>
+    <button onclick="clearAuth()" class="danger">Clear Auth Data</button>
+  </div>
+  
+  <script>
+    function forceLogin() {
+      localStorage.setItem('auth_token', 'direct-token-' + Date.now());
+      localStorage.setItem('user_data', JSON.stringify(defaultUser));
+      alert('Auth data has been set!');
+    }
+    
+    function clearAuth() {
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('user_data');
+      sessionStorage.clear();
+      alert('Auth data has been cleared!');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile | Innovate</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="container navbar-container">
+      <h1 class="logo">Innovate</h1>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="messages.html"><i class="fas fa-comment"></i> Messages</a></li>
+          <li><a href="communities.html"><i class="fas fa-users"></i> Communities</a></li>
+          <li><a href="events.html"><i class="fas fa-calendar"></i> Events</a></li>
+          <li><a href="profile.html" class="active"><i class="fas fa-user"></i> Profile</a></li>
+          <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+      </nav>
+      <div class="nav-right">
+        <a href="#" id="notifications-btn"><i class="fas fa-bell"></i></a>
+        <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-container">
+    <div class="profile-header-container">
+      <div class="profile-cover"></div>
+      <div class="profile-header-content">
+        <div class="profile-avatar-large" id="profile-avatar">JD</div>
+        <div class="profile-header-info">
+          <h1 id="profile-name">Loading...</h1>
+          <p class="profile-username" id="profile-username">@loading</p>
+          <div class="profile-stats-bar">
+            <div class="profile-stat">
+              <span class="stat-count" id="posts-count">0</span>
+              <span class="stat-label">Posts</span>
+            </div>
+            <div class="profile-stat">
+              <span class="stat-count" id="following-count">0</span>
+              <span class="stat-label">Following</span>
+            </div>
+            <div class="profile-stat">
+              <span class="stat-count" id="followers-count">0</span>
+              <span class="stat-label">Followers</span>
+            </div>
+          </div>
+        </div>
+        <div class="profile-actions" id="profile-actions">
+          <!-- Actions will be added dynamically based on whose profile is being viewed -->
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-content">
+      <div class="profile-tabs">
+        <button class="profile-tab active" data-tab="posts">Posts</button>
+        <button class="profile-tab" data-tab="about">About</button>
+        <button class="profile-tab" data-tab="connections">Connections</button>
+        <button class="profile-tab" data-tab="saved">Saved</button>
+      </div>
+
+      <div class="profile-tab-content">
+        <!-- Posts Tab Content -->
+        <div class="tab-panel active" id="posts-panel">
+          <div class="posts-container" id="posts-container">
+            <div class="loading-posts">
+              <i class="fas fa-spinner fa-spin"></i> Loading posts...
+            </div>
+          </div>
+        </div>
+
+        <!-- About Tab Content -->
+        <div class="tab-panel" id="about-panel">
+          <div class="profile-about-section">
+            <h3>Bio</h3>
+            <p id="profile-bio">No bio available.</p>
+            
+            <h3>Skills</h3>
+            <div class="skills-list" id="profile-skills">
+              <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i> Loading skills...
+              </div>
+            </div>
+            
+            <h3>Interests</h3>
+            <div class="interests-list" id="profile-interests">
+              <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i> Loading interests...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connections Tab Content -->
+        <div class="tab-panel" id="connections-panel">
+          <div class="connections-filter">
+            <button class="connection-filter-btn active" data-filter="followers">Followers</button>
+            <button class="connection-filter-btn" data-filter="following">Following</button>
+          </div>
+          
+          <div class="connections-list" id="connections-list">
+            <div class="loading-spinner">
+              <i class="fas fa-spinner fa-spin"></i> Loading connections...
+            </div>
+          </div>
+        </div>
+
+        <!-- Saved Tab Content -->
+        <div class="tab-panel" id="saved-panel">
+          <div class="saved-posts-container" id="saved-posts-container">
+            <div class="loading-spinner">
+              <i class="fas fa-spinner fa-spin"></i> Loading saved posts...
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Edit Profile Modal -->
+  <div id="edit-profile-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Edit Profile</h2>
+      <form id="edit-profile-form">
+        <div class="form-group">
+          <label for="edit-name">Full Name</label>
+          <input type="text" id="edit-name" name="edit-name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="edit-bio">Bio</label>
+          <textarea id="edit-bio" name="edit-bio" rows="4"></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="edit-skills">Skills (comma separated)</label>
+          <input type="text" id="edit-skills" name="edit-skills" placeholder="e.g. JavaScript, Design, Marketing">
+        </div>
+        
+        <div class="form-group">
+          <label for="edit-interests">Interests (comma separated)</label>
+          <input type="text" id="edit-interests" name="edit-interests" placeholder="e.g. AI, Sustainability, Education">
+        </div>
+        
+        <div class="form-footer">
+          <button type="submit" class="primary-btn">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Message Modal -->
+  <div id="message-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Send Message</h2>
+      <form id="message-form">
+        <div class="recipient-info" id="recipient-info">
+          <div class="recipient-avatar"></div>
+          <div>
+            <h3 class="recipient-name"></h3>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="message-text">Message</label>
+          <textarea id="message-text" name="message-text" rows="4" required></textarea>
+        </div>
+        
+        <div class="form-footer">
+          <button type="submit" class="primary-btn">Send Message</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/auth-check.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

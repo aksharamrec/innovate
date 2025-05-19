@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fallback Page - Innovate</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      text-align: center;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #4338ca;
+    }
+    .card {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    button {
+      background: #4338ca;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    .red {
+      background: #ef4444;
+    }
+    .green {
+      background: #10b981;
+    }
+  </style>
+</head>
+<body>
+  <h1>Innovate - Emergency Access</h1>
+  
+  <div class="card">
+    <h2>Something went wrong</h2>
+    <p>We detected an issue with the application. This fallback page will help you recover.</p>
+  </div>
+  
+  <div class="card">
+    <h2>Recovery Options</h2>
+    <button class="green" onclick="fixAndGoHome()">Fix and Go to Home</button>
+    <button onclick="goToDebug()">Go to Debug Page</button>
+    <button class="red" onclick="resetEverything()">Reset Everything</button>
+  </div>
+  
+  <script>
+    // Simple recovery functions
+    function fixAndGoHome() {
+      // Clear problematic storage
+      sessionStorage.clear();
+      
+      // Set emergency authentication
+      localStorage.setItem('auth_token', 'fallback-token-' + Date.now());
+      localStorage.setItem('user_data', JSON.stringify({
+        id: '1',
+        name: 'John Doe',
+        username: 'johndoe',
+        email: 'user@example.com',
+        avatar: null,
+        stats: { posts: 15, following: 124, followers: 89 }
+      }));
+      
+      // Navigate to home with bypass
+      window.location.href = '/home.html?bypass=true&from=fallback';
+    }
+    
+    function goToDebug() {
+      window.location.href = '/debug.html';
+    }
+    
+    function resetEverything() {
+      localStorage.clear();
+      sessionStorage.clear();
+      alert('All storage cleared! You will now be redirected to the login page.');
+      window.location.href = '/auth.html';
+    }
+  </script>
+</body>
+</html>

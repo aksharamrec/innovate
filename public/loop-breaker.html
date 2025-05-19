@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loop Breaker - Emergency</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #e53e3e;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 8px;
+      border: none;
+      border-radius: 4px;
+      background-color: #4338ca;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .danger {
+      background-color: #e53e3e;
+    }
+    pre {
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 4px;
+      text-align: left;
+      overflow: auto;
+      max-height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Redirect Loop Detected!</h1>
+    <p>We've detected a redirect loop and stopped it for your safety.</p>
+    
+    <div>
+      <h2>Actions</h2>
+      <button id="auth-btn">Create Auth & Go Home</button>
+      <button id="clear-btn" class="danger">Clear Storage & Restart</button>
+    </div>
+    
+    <div>
+      <h2>Debug Info</h2>
+      <pre id="debug-info">Loading...</pre>
+    </div>
+  </div>
+  
+  <script>
+    // Display debug info
+    const debugInfo = document.getElementById('debug-info');
+    debugInfo.textContent = `
+URL: ${window.location.href}
+localStorage keys: ${Object.keys(localStorage).join(', ')}
+sessionStorage keys: ${Object.keys(sessionStorage).join(', ')}
+Time: ${new Date().toISOString()}
+    `;
+    
+    // Create auth and go home
+    document.getElementById('auth-btn').addEventListener('click', function() {
+      // Clear all storage first
+      sessionStorage.clear();
+      
+      // Set auth data
+      localStorage.setItem('auth_token', 'emergency-token-' + Date.now());
+      localStorage.setItem('user_data', JSON.stringify({
+        id: '1',
+        name: 'John Doe',
+        username: 'johndoe',
+        email: 'user@example.com',
+        avatar: null,
+        stats: { posts: 15, following: 124, followers: 89 }
+      }));
+      
+      // Go directly to home with bypass
+      window.location.href = '/home.html?bypass=true&emergency=true&t=' + Date.now();
+    });
+    
+    // Clear everything and restart
+    document.getElementById('clear-btn').addEventListener('click', function() {
+      localStorage.clear();
+      sessionStorage.clear();
+      alert('All storage cleared. You will now be redirected to the start page.');
+      window.location.href = '/';
+    });
+  </script>
+</body>
+</html>

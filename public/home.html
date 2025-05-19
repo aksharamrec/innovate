@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Innovate</title>
+  <!-- EMERGENCY AUTH FOR DEMO PURPOSES -->
+  <script>
+    // Force authentication to avoid redirects
+    localStorage.setItem('auth_token', 'demo-token-' + Date.now());
+    localStorage.setItem('user_data', JSON.stringify({
+      id: '1',
+      name: 'John Doe',
+      username: 'johndoe',
+      email: 'user@example.com',
+      avatar: null,
+      stats: { posts: 15, following: 124, followers: 89 }
+    }));
+  </script>
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/polls.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="container navbar-container">
+      <h1 class="logo">Innovate</h1>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="home.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="messages.html"><i class="fas fa-comment"></i> Messages</a></li>
+          <li><a href="communities.html"><i class="fas fa-users"></i> Communities</a></li>
+          <li><a href="events.html"><i class="fas fa-calendar"></i> Events</a></li>
+          <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+          <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+      </nav>
+      <div class="nav-right">
+        <a href="#" id="notifications-btn"><i class="fas fa-bell"></i></a>
+        <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-container">
+    <div class="content-layout">
+      <!-- Left sidebar for user profile and navigation -->
+      <div class="left-sidebar">
+        <div class="profile-card">
+          <div class="profile-header">
+            <div class="profile-avatar" id="user-avatar">JD</div>
+            <div class="profile-info">
+              <h3 id="user-name">Loading...</h3>
+              <p class="profile-handle" id="user-handle">@loading</p>
+            </div>
+          </div>
+          <div class="profile-stats">
+            <div class="stat-item">
+              <span class="stat-value" id="post-count">0</span>
+              <span class="stat-label">Posts</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value" id="following-count">0</span>
+              <span class="stat-label">Following</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value" id="followers-count">0</span>
+              <span class="stat-label">Followers</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="sidebar-nav">
+          <ul>
+            <li><a href="#" class="active" data-filter="all"><i class="fas fa-globe"></i> All Posts</a></li>
+            <li><a href="#" data-filter="following"><i class="fas fa-user-friends"></i> Following</a></li>
+            <li><a href="#" data-filter="trending"><i class="fas fa-fire"></i> Trending</a></li>
+            <li><a href="#" data-filter="latest"><i class="fas fa-clock"></i> Latest</a></li>
+            <li class="sidebar-divider"></li>
+            <li><a href="profile.html"><i class="fas fa-user"></i> My Profile</a></li>
+            <li><a href="bookmarks.html"><i class="fas fa-bookmark"></i> Saved Posts</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Main content area -->
+      <div class="main-content">
+        <!-- Post creation card -->
+        <div class="post-creator">
+          <div class="post-input-container">
+            <div class="post-avatar" id="create-post-avatar">JD</div>
+            <div class="post-input" id="create-post-trigger">What's on your mind?</div>
+          </div>
+          <div class="post-type-options">
+            <button class="post-type-btn" data-type="text"><i class="fas fa-keyboard"></i> Text</button>
+            <button class="post-type-btn" data-type="image"><i class="fas fa-image"></i> Image</button>
+            <button class="post-type-btn" data-type="attachment"><i class="fas fa-paperclip"></i> File</button>
+            <button class="post-type-btn" data-type="poll"><i class="fas fa-poll"></i> Poll</button>
+          </div>
+        </div>
+        
+        <!-- Post filter options (mobile only) -->
+        <div class="post-filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="following">Following</button>
+          <button class="filter-btn" data-filter="trending">Trending</button>
+          <button class="filter-btn" data-filter="latest">Latest</button>
+        </div>
+        
+        <!-- Posts container -->
+        <div id="posts-container" class="posts-container">
+          <!-- Posts will be loaded here -->
+          <div class="loading-posts">
+            <i class="fas fa-spinner fa-spin"></i> Loading posts...
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right sidebar for trending topics and suggested connections -->
+      <div class="right-sidebar">
+        <div class="sidebar-card">
+          <h3 class="sidebar-title">Trending Topics</h3>
+          <ul class="trending-topics" id="trending-topics">
+            <li><a href="#">#SustainableTech</a></li>
+            <li><a href="#">#AIInnovation</a></li>
+            <li><a href="#">#CleanEnergy</a></li>
+            <li><a href="#">#QuantumComputing</a></li>
+          </ul>
+        </div>
+        
+        <div class="sidebar-card">
+          <h3 class="sidebar-title">Connect with</h3>
+          <div id="connection-suggestions">
+            <!-- Connection suggestions will be loaded here -->
+            <div class="loading-spinner">
+              <i class="fas fa-spinner fa-spin"></i> Loading...
+            </div>
+          </div>
+        </div>
+        
+        <div class="sidebar-card">
+          <h3 class="sidebar-title">Upcoming Events</h3>
+          <div id="upcoming-events">
+            <!-- Events will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Enhanced Create Post Modal -->
+  <div id="create-post-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Create Post</h2>
+      <div class="post-type-tabs">
+        <button class="post-tab active" data-tab="text-post">
+          <i class="fas fa-keyboard"></i> Text
+        </button>
+        <button class="post-tab" data-tab="image-post">
+          <i class="fas fa-image"></i> Image
+        </button>
+        <button class="post-tab" data-tab="file-post">
+          <i class="fas fa-paperclip"></i> File
+        </button>
+        <button class="post-tab" data-tab="poll-post">
+          <i class="fas fa-poll"></i> Poll
+        </button>
+      </div>
+      
+      <form id="create-post-form">
+        <div class="tab-content active" id="text-post">
+          <div class="form-group">
+            <textarea id="post-content" placeholder="What's on your mind?" required></textarea>
+          </div>
+        </div>
+        
+        <div class="tab-content" id="image-post">
+          <div class="form-group">
+            <textarea id="image-post-content" placeholder="Add a caption for your image"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="post-image">Upload Image</label>
+            <input type="file" id="post-image" accept="image/*">
+            <div id="image-preview"></div>
+          </div>
+        </div>
+        
+        <div class="tab-content" id="file-post">
+          <div class="form-group">
+            <textarea id="file-post-content" placeholder="Add a description for your file"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="post-file">Upload File</label>
+            <input type="file" id="post-file">
+            <div id="file-preview"></div>
+            <p class="form-help">Supported file types: PDF, DOC, DOCX, TXT, ZIP (Max 10MB)</p>
+          </div>
+        </div>
+        
+        <div class="tab-content" id="poll-post">
+          <div class="form-group">
+            <textarea id="poll-question" placeholder="Ask a question..."></textarea>
+          </div>
+          <div class="poll-options" id="poll-options">
+            <div class="form-group poll-option">
+              <input type="text" placeholder="Option 1" class="poll-option-input" required>
+            </div>
+            <div class="form-group poll-option">
+              <input type="text" placeholder="Option 2" class="poll-option-input" required>
+            </div>
+          </div>
+          <button type="button" id="add-poll-option" class="secondary-btn">Add Option</button>
+          <div class="form-group">
+            <label for="poll-duration">Poll Duration</label>
+            <select id="poll-duration">
+              <option value="1">1 day</option>
+              <option value="3" selected>3 days</option>
+              <option value="7">1 week</option>
+              <option value="14">2 weeks</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="post-visibility">
+          <label for="post-visibility">Who can see this post?</label>
+          <select id="post-visibility">
+            <option value="public" selected>Everyone</option>
+            <option value="connections">Connections only</option>
+          </select>
+        </div>
+        
+        <div class="form-footer">
+          <button type="submit" class="primary-btn create-post-btn">Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/auth-check.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

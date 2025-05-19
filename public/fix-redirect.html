@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fixing Redirect...</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+    .progress { margin: 20px auto; height: 10px; width: 80%; background: #f0f0f0; border-radius: 5px; }
+    .progress-bar { height: 100%; width: 0; background: #4caf50; border-radius: 5px; transition: width 1s; }
+  </style>
+</head>
+<body>
+  <h1>Fixing Redirect Issue</h1>
+  <p>Redirecting you to the correct home page path...</p>
+  <div class="progress">
+    <div class="progress-bar" id="progress"></div>
+  </div>
+  <p id="status">Initializing...</p>
+  
+  <script>
+    // Display loading progress
+    let progress = 0;
+    const progressBar = document.getElementById('progress');
+    const status = document.getElementById('status');
+    
+    function updateProgress() {
+      progress += 20;
+      progressBar.style.width = progress + '%';
+      
+      if (progress === 20) {
+        status.textContent = "Checking current path...";
+      } else if (progress === 40) {
+        status.textContent = "Fixing path issues...";
+      } else if (progress === 60) {
+        status.textContent = "Preparing correct redirect...";
+      } else if (progress === 80) {
+        status.textContent = "Almost there...";
+      } else if (progress >= 100) {
+        status.textContent = "Redirecting now!";
+        // Redirect to the correct path
+        const correctPath = '/home.html';
+        window.location.href = correctPath;
+      }
+      
+      if (progress < 100) {
+        setTimeout(updateProgress, 300);
+      }
+    }
+    
+    // Start the progress animation
+    window.addEventListener('load', () => {
+      updateProgress();
+    });
+  </script>
+</body>
+</html>

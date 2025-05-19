@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events | Innovate</title>
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/events.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="container navbar-container">
+      <h1 class="logo">Innovate</h1>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="messages.html"><i class="fas fa-comment"></i> Messages</a></li>
+          <li><a href="communities.html"><i class="fas fa-users"></i> Communities</a></li>
+          <li><a href="events.html" class="active"><i class="fas fa-calendar"></i> Events</a></li>
+          <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+        </ul>
+      </nav>
+      <div class="nav-right">
+        <a href="#" id="notifications-btn"><i class="fas fa-bell"></i></a>
+        <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container events-container">
+    <div class="events-wrapper">
+      <!-- Events sidebar with filters and create button -->
+      <div class="events-sidebar">
+        <div class="create-event-container">
+          <button id="create-event-btn" class="primary-btn">
+            <i class="fas fa-plus"></i> Create Event
+          </button>
+        </div>
+        
+        <div class="events-navigation">
+          <h3>Events</h3>
+          <nav class="events-nav">
+            <a href="#" class="nav-link active" data-view="upcoming">
+              <i class="fas fa-calendar-day"></i> Upcoming
+            </a>
+            <a href="#" class="nav-link" data-view="my-events">
+              <i class="fas fa-user-check"></i> My Events
+            </a>
+            <a href="#" class="nav-link" data-view="past-events">
+              <i class="fas fa-history"></i> Past Events
+            </a>
+            <a href="#" class="nav-link" data-view="calendar">
+              <i class="fas fa-calendar-alt"></i> Calendar View
+            </a>
+          </nav>
+        </div>
+        
+        <div class="events-search-container">
+          <div class="search-input-wrapper">
+            <input type="text" id="event-search" placeholder="Search events..." class="search-input">
+            <i class="fas fa-search search-icon"></i>
+          </div>
+        </div>
+        
+        <div class="events-list-container">
+          <div id="events-list" class="events-list">
+            <!-- Events will be loaded here -->
+            <div class="loading-spinner">
+              <i class="fas fa-spinner fa-spin"></i> Loading events...
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Main content area for event details -->
+      <div class="events-content" id="events-content">
+        <div class="empty-state">
+          <i class="fas fa-calendar-alt"></i>
+          <h3>Events</h3>
+          <p>Select an event to view or create a new one</p>
+          <button id="get-started-btn" class="primary-btn">Create Event</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Create Event Modal -->
+  <div id="create-event-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Create Event</h2>
+      <form id="create-event-form">
+        <div class="form-group">
+          <label for="event-title">Event Title</label>
+          <input type="text" id="event-title" name="event-title" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="event-date">Date</label>
+          <input type="date" id="event-date" name="event-date" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="event-time">Time</label>
+          <input type="time" id="event-time" name="event-time" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="event-location">Location</label>
+          <input type="text" id="event-location" name="event-location" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="event-description">Description</label>
+          <textarea id="event-description" name="event-description" rows="4"></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="event-type">Event Type</label>
+          <select id="event-type" name="event-type">
+            <option value="in-person">In-Person</option>
+            <option value="online">Online</option>
+            <option value="hybrid">Hybrid</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="event-community">Community (Optional)</label>
+          <select id="event-community" name="event-community">
+            <option value="">-- None --</option>
+            <option value="tech-innovators">Tech Innovators</option>
+            <option value="startup-founders">Startup Founders</option>
+            <option value="creative-minds">Creative Minds</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="event-rsvp">RSVP Deadline</label>
+          <input type="date" id="event-rsvp" name="event-rsvp">
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" class="secondary-btn" data-close-modal>Cancel</button>
+          <button type="submit" class="primary-btn">Create Event</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- RSVP Options Modal -->
+  <div id="rsvp-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>RSVP to Event</h2>
+      <div class="rsvp-options">
+        <button class="rsvp-option" data-rsvp="going">
+          <i class="fas fa-check-circle"></i>
+          <span>Going</span>
+        </button>
+        <button class="rsvp-option" data-rsvp="interested">
+          <i class="fas fa-star"></i>
+          <span>Interested</span>
+        </button>
+        <button class="rsvp-option" data-rsvp="not-going">
+          <i class="fas fa-times-circle"></i>
+          <span>Not Going</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/auth-check.js"></script>
+  <script src="js/events.js"></script>
+</body>
+</html>

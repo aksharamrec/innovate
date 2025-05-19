@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communities - Innovate</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/communities.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="app-body">
+    <nav class="app-navbar">
+        <div class="container navbar-container">
+            <div class="navbar-left">
+                <a href="home.html" class="navbar-logo">
+                    <img src="assets/images/innovate-logo.svg" alt="Innovate Logo">
+                    <span>Innovate</span>
+                </a>
+                <div class="navbar-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search..." id="navbarSearch">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-menu">
+                    <a href="home.html" class="navbar-menu-item">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="messages.html" class="navbar-menu-item">
+                        <i class="fas fa-comment-alt"></i>
+                        <span>Messages</span>
+                    </a>
+                    <a href="communities.html" class="navbar-menu-item active">
+                        <i class="fas fa-users"></i>
+                        <span>Communities</span>
+                    </a>
+                    <a href="events.html" class="navbar-menu-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Events</span>
+                    </a>
+                </div>
+                <div class="navbar-user">
+                    <a href="notifications.html" class="navbar-icon-button">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </a>
+                    <div class="dropdown">
+                        <button class="navbar-profile-button dropdown-toggle" id="profileDropdown">
+                            <img src="assets/images/avatars/default.png" alt="Your Profile" class="profile-avatar" id="navbarAvatar">
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                My Profile
+                            </a>
+                            <a href="settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" id="logout-button">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Log Out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="app-main">
+        <div class="container">
+            <div class="communities-header">
+                <h1>Communities</h1>
+                <div class="communities-actions">
+                    <button class="btn btn-primary" id="createCommunityBtn">
+                        <i class="fas fa-plus"></i> Create Community
+                    </button>
+                </div>
+            </div>
+
+            <div class="communities-tabs">
+                <button class="tab-btn active" data-tab="discover">Discover</button>
+                <button class="tab-btn" data-tab="my-communities">My Communities</button>
+                <button class="tab-btn" data-tab="invites">Invites <span class="badge">2</span></button>
+            </div>
+
+            <div class="communities-search-filter">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search communities..." id="communitySearch">
+                </div>
+                <div class="filter-container">
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                        <option value="tech">Technology</option>
+                        <option value="design">Design</option>
+                        <option value="business">Business</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="education">Education</option>
+                        <option value="health">Health & Wellness</option>
+                        <option value="art">Art & Culture</option>
+                    </select>
+                    <select id="sortFilter">
+                        <option value="popular">Most Popular</option>
+                        <option value="new">Newest First</option>
+                        <option value="active">Most Active</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="tab-content active" id="discover-tab">
+                <div class="featured-communities">
+                    <h2>Featured Communities</h2>
+                    <div class="communities-grid">
+                        <div class="community-card featured">
+                            <div class="community-banner">
+                                <img src="assets/images/communities/ai-banner.jpg" alt="AI Innovations Banner">
+                            </div>
+                            <div class="community-info">
+                                <img src="assets/images/communities/ai.png" alt="AI Innovations" class="community-avatar">
+                                <h3>AI Innovations</h3>
+                                <p class="community-stats">15.4K members • 320 posts this week</p>
+                                <p class="community-description">Discuss the latest in artificial intelligence, machine learning, and neural networks. Share your projects and get feedback from experts.</p>
+                                <button class="btn btn-outline join-btn" data-community-id="ai">Join</button>
+                            </div>
+                        </div>
+
+                        <div class="community-card featured">
+                            <div class="community-banner">
+                                <img src="assets/images/communities/design-banner.jpg" alt="Design Thinkers Banner">
+                            </div>
+                            <div class="community-info">
+                                <img src="assets/images/communities/design.png" alt="Design Thinkers" class="community-avatar">
+                                <h3>Design Thinkers</h3>
+                                <p class="community-stats">8.2K members • 145 posts this week</p>
+                                <p class="community-description">For UX/UI designers and creative minds. Share your work, get inspiration, and collaborate on design projects.</p>
+                                <button class="btn btn-outline join-btn" data-community-id="design">Join</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Recommended for You</h2>
+                <div class="communities-grid">
+                    <div class="community-card">
+                        <img src="assets/images/communities/startup.png" alt="Startup Network" class="community-avatar">
+                        <h3>Startup Network</h3>
+                        <p class="community-stats">8.9K members • 98 posts this week</p>
+                        <p class="community-description">Connect with founders, investors, and startup enthusiasts. Share your journey and learn from others.</p>
+                        <button class="btn btn-outline join-btn" data-community-id="startup">Join</button>
+                    </div>
+
+                    <div class="community-card">
+                        <img src="assets/images/communities/marketing.png" alt="Digital Marketing" class="community-avatar">
+                        <h3>Digital Marketing</h3>
+                        <p class="community-stats">12.1K members • 210 posts this week</p>
+                        <p class="community-description">Strategies, tips, and case studies for all digital marketing channels. Stay updated with the latest trends.</p>
+                        <button class="btn btn-outline join-btn" data-community-id="marketing">Join</button>
+                    </div>
+
+                    <div class="community-card">
+                        <img src="assets/images/communities/coding.png" alt="Coding Wizards" class="community-avatar">
+                        <h3>Coding Wizards</h3>
+                        <p class="community-stats">10.5K members • 178 posts this week</p>
+                        <p class="community-description">Share your coding projects, ask for help with debugging, and discuss programming languages.</p>
+                        <button class="btn btn-outline join-btn" data-community-id="coding">Join</button>
+                    </div>
+
+                    <div class="community-card">
+                        <img src="assets/images/communities/product.png" alt="Product Managers" class="community-avatar">
+                        <h3>Product Managers</h3>
+                        <p class="community-stats">7.3K members • 85 posts this week</p>
+                        <p class="community-description">Best practices, methodologies, and tools for product managers. Share experiences and get advice.</p>
+                        <button class="btn btn-outline join-btn" data-community-id="product">Join</button>
+                    </div>
+                </div>
+
+                <div class="load-more">
+                    <button class="btn btn-outline" id="loadMoreCommunitiesBtn">Load More</button>
+                </div>
+            </div>
+
+            <div class="tab-content" id="my-communities-tab">
+                <div class="my-communities-container">
+                    <div class="community-card joined">
+                        <img src="assets/images/communities/tech.png" alt="Tech Innovations" class="community-avatar">
+                        <h3>Tech Innovations</h3>
+                        <p class="community-stats">21.3K members • You joined 3 months ago</p>
+                        <p class="community-description">The latest in technology innovations, gadgets, and breakthroughs. Share news and discuss the future of tech.</p>
+                        <div class="community-actions">
+                            <button class="btn btn-primary btn-sm">View</button>
+                            <button class="btn btn-outline btn-sm leave-btn">Leave</button>
+                        </div>
+                    </div>
+
+                    <div class="community-card joined">
+                        <img src="assets/images/communities/design.png" alt="Design Thinkers" class="community-avatar">
+                        <h3>Design Thinkers</h3>
+                        <p class="community-stats">8.2K members • You joined 1 month ago</p>
+                        <p class="community-description">For UX/UI designers and creative minds. Share your work, get inspiration, and collaborate on design projects.</p>
+                        <div class="community-actions">
+                            <button class="btn btn-primary btn-sm">View</button>
+                            <button class="btn btn-outline btn-sm leave-btn">Leave</button>
+                        </div>
+                    </div>
+
+                    <div class="community-card joined">
+                        <img src="assets/images/communities/marketing.png" alt="Digital Marketing" class="community-avatar">
+                        <h3>Digital Marketing</h3>
+                        <p class="community-stats">12.1K members • You joined 2 weeks ago</p>
+                        <p class="community-description">Strategies, tips, and case studies for all digital marketing channels. Stay updated with the latest trends.</p>
+                        <div class="community-actions">
+                            <button class="btn btn-primary btn-sm">View</button>
+                            <button class="btn btn-outline btn-sm leave-btn">Leave</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="no-communities" style="display: none;">
+                    <i class="fas fa-users"></i>
+                    <h3>You haven't joined any communities yet</h3>
+                    <p>Discover and join communities to connect with like-minded people</p>
+                    <button class="btn btn-primary" id="exploreCommunitiesBtn">Explore Communities</button>
+                </div>
+            </div>
+
+            <div class="tab-content" id="invites-tab">
+                <div class="community-invites">
+                    <div class="invite-card">
+                        <div class="invite-info">
+                            <img src="assets/images/communities/blockchain.png" alt="Blockchain Innovators" class="community-avatar">
+                            <div>
+                                <h3>Blockchain Innovators</h3>
+                                <p class="community-stats">6.7K members</p>
+                                <p class="invite-message">
+                                    <img src="assets/images/avatars/user2.png" alt="Michael Chen" class="inviter-avatar">
+                                    <span><strong>Michael Chen</strong> invited you to join this community</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="invite-actions">
+                            <button class="btn btn-primary btn-sm accept-invite-btn">Accept</button>
+                            <button class="btn btn-outline btn-sm decline-invite-btn">Decline</button>
+                        </div>
+                    </div>
+
+                    <div class="invite-card">
+                        <div class="invite-info">
+                            <img src="assets/images/communities/freelance.png" alt="Freelance Collective" class="community-avatar">
+                            <div>
+                                <h3>Freelance Collective</h3>
+                                <p class="community-stats">4.3K members</p>
+                                <p class="invite-message">
+                                    <img src="assets/images/avatars/user3.png" alt="Alex Rivera" class="inviter-avatar">
+                                    <span><strong>Alex Rivera</strong> invited you to join this community</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="invite-actions">
+                            <button class="btn btn-primary btn-sm accept-invite-btn">Accept</button>
+                            <button class="btn btn-outline btn-sm decline-invite-btn">Decline</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="no-invites" style="display: none;">
+                    <i class="fas fa-envelope-open"></i>
+                    <h3>No pending invites</h3>
+                    <p>When someone invites you to join a community, you'll see it here</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Create Community Modal -->
+    <div class="modal" id="createCommunityModal">
+        <div class="modal-content community-modal">
+            <span class="close-modal">&times;</span>
+            <h3>Create a Community</h3>
+            <form id="createCommunityForm">
+                <div class="form-group">
+                    <label for="communityName">Community Name</label>
+                    <input type="text" id="communityName" name="communityName" required placeholder="Enter a unique name for your community">
+                </div>
+                <div class="form-group">
+                    <label for="communityCategory">Category</label>
+                    <select id="communityCategory" name="communityCategory" required>
+                        <option value="" disabled selected>Select a category</option>
+                        <option value="tech">Technology</option>
+                        <option value="design">Design</option>
+                        <option value="business">Business</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="education">Education</option>
+                        <option value="health">Health & Wellness</option>
+                        <option value="art">Art & Culture</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="communityDescription">Description</label>
+                    <textarea id="communityDescription" name="communityDescription" rows="4" required placeholder="Tell potential members what your community is about"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="communityPrivacy">Privacy Setting</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="privacyPublic" name="communityPrivacy" value="public" checked>
+                            <label for="privacyPublic">
+                                <strong>Public</strong>
+                                <span>Anyone can see and join this community</span>
+                            </label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="privacyPrivate" name="communityPrivacy" value="private">
+                            <label for="privacyPrivate">
+                                <strong>Private</strong>
+                                <span>Only members can see content, membership requires approval</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Community Avatar</label>
+                    <div class="avatar-upload">
+                        <div class="avatar-preview">
+                            <div id="communityAvatarPreview" style="background-image: url(assets/images/communities/default.png);"></div>
+                        </div>
+                        <div class="avatar-edit">
+                            <input type='file' id="communityAvatarUpload" accept=".png, .jpg, .jpeg" />
+                            <label for="communityAvatarUpload">Choose Image</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Create Community</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/communities.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Innovate</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/messages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="app-body">
+    <nav class="app-navbar">
+        <div class="container navbar-container">
+            <div class="navbar-left">
+                <a href="home.html" class="navbar-logo">
+                    <img src="assets/images/innovate-logo.svg" alt="Innovate Logo">
+                    <span>Innovate</span>
+                </a>
+                <div class="navbar-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search..." id="navbarSearch">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-menu">
+                    <a href="home.html" class="navbar-menu-item">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="messages.html" class="navbar-menu-item active">
+                        <i class="fas fa-comment-alt"></i>
+                        <span>Messages</span>
+                        <span class="notification-badge">3</span>
+                    </a>
+                    <a href="communities.html" class="navbar-menu-item">
+                        <i class="fas fa-users"></i>
+                        <span>Communities</span>
+                    </a>
+                    <a href="events.html" class="navbar-menu-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Events</span>
+                    </a>
+                </div>
+                <div class="navbar-user">
+                    <a href="notifications.html" class="navbar-icon-button">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </a>
+                    <div class="dropdown">
+                        <button class="navbar-profile-button dropdown-toggle" id="profileDropdown">
+                            <img src="assets/images/avatars/default.png" alt="Your Profile" class="profile-avatar" id="navbarAvatar">
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                My Profile
+                            </a>
+                            <a href="settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" id="logout-button">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Log Out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="app-main">
+        <div class="container">
+            <div class="messages-container">
+                <!-- Conversations sidebar -->
+                <div class="conversations-sidebar">
+                    <div class="conversations-header">
+                        <h2>Messages</h2>
+                        <button class="btn-icon" id="startNewConversation" title="New Message">
+                            <i class="fas fa-pen-to-square"></i>
+                        </button>
+                    </div>
+                    <div class="conversations-search">
+                        <div class="input-with-icon">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search messages..." id="conversationSearch">
+                        </div>
+                    </div>
+                    <div class="conversations-list" id="conversationsList">
+                        <!-- Conversations will be loaded here -->
+                    </div>
+                </div>
+                
+                <!-- Messages container -->
+                <div class="messages-main">
+                    <!-- Conversation header -->
+                    <div class="conversation-header" id="conversationHeader">
+                        <div class="empty-state-message">
+                            <i class="fas fa-comment-dots"></i>
+                            <h3>Select a conversation or start a new one</h3>
+                        </div>
+                    </div>
+                    
+                    <!-- Messages area -->
+                    <div class="messages-area">
+                        <div class="messages-container" id="messagesContainer">
+                            <!-- Messages will be loaded here -->
+                        </div>
+                        
+                        <!-- Message input -->
+                        <div class="message-actions" id="messageActions" style="display: none;">
+                            <form id="messageForm" class="message-form">
+                                <button type="button" class="message-action-button" id="attachmentButton">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                                <input type="text" id="messageInput" placeholder="Type a message...">
+                                <button type="submit" class="send-message-button">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Hidden file input for attachments -->
+    <input type="file" id="fileUpload" accept="image/*,video/*,application/pdf" style="display: none;">
+
+    <script src="js/main.js"></script>
+    <script src="js/messages.js"></script>
+</body>
+</html>

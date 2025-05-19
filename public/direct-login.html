@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direct Login - Innovate</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 0;
+      display: block;
+      width: 100%;
+    }
+    #log {
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 20px;
+      max-height: 300px;
+      overflow: auto;
+      border: 1px solid #ddd;
+    }
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+    }
+    .success { color: green; }
+    .error { color: red; }
+    .info { color: blue; }
+  </style>
+</head>
+<body>
+  <h1>Direct Login Tool</h1>
+  <p>This tool helps debug login issues by using direct API calls.</p>
+  
+  <button id="api-test">1. Test API Connection</button>
+  <button id="clear-storage">2. Clear Local Storage</button>
+  <button id="login-test">3. Test Login</button>
+  <button id="check-storage">4. Check Local Storage</button>
+  <button id="go-home">5. Go to Home Page</button>
+  
+  <div id="log">
+    <pre>Log output will appear here...</pre>
+  </div>
+  
+  <script>
+    const log = document.getElementById('log');
+    
+    function logMessage(message, type = 'info') {
+      const timestamp = new Date().toLocaleTimeString();
+      const entry = document.createElement('div');
+      entry.classList.add(type);
+      entry.textContent = `[${timestamp}] ${message}`;
+      log.appendChild(entry);
+      log.scrollTop = log.scrollHeight;
+    }
+    
+    // Test API connection
+    document.getElementById('api-test').addEventListener('click', async () => {
+      logMessage('Testing API connection...', 'info');
+      
+      try {
+        const response = await fetch('/api/test');
+        const data = await response.json();
+        logMessage(`API test successful: ${JSON.stringify(data)}`, 'success');
+      } catch (error) {
+        logMessage(`API test failed: ${error.message}`, 'error');
+      }
+    });
+    
+    // Clear local storage
+    document.getElementById('clear-storage').addEventListener('click', () => {
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('user_data');
+      logMessage('Local storage cleared', 'success');
+    });
+    
+    // Test login
+    document.getElementById('login-test').addEventListener('click', async () => {
+      logMessage('Testing login...', 'info');
+      
+      const credentials = {
+        email: 'user@example.com',
+        password: 'password123'
+      };
+      
+      try {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(credentials)
+        });
+        
+        logMessage(`Login response status: ${response.status}`, 'info');
+        
+        const data = await response.json();
+        logMessage(`Login response: ${JSON.stringify(data, null, 2)}`, response.ok ? 'success' : 'error');
+        
+        if (data.token) {
+          localStorage.setItem('auth_token', data.token);
+          localStorage.setItem('user_data', JSON.stringify(data.user));
+          logMessage('Saved login data to localStorage', 'success');
+        }
+      } catch (error) {
+        logMessage(`Login failed: ${error.message}`, 'error');
+      }
+    });
+    
+    // Check local storage
+    document.getElementById('check-storage').addEventListener('click', () => {
+      const token = localStorage.getItem('auth_token');
+      const userData = localStorage.getItem('user_data');
+      
+      if (token) {
+        logMessage(`Token found: ${token.substring(0, 15)}...`, 'success');
+      } else {
+        logMessage('No token in localStorage', 'error');
+      }
+      
+      if (userData) {
+        try {
+          const user = JSON.parse(userData);
+          logMessage(`User data found: ${JSON.stringify(user, null, 2)}`, 'success');
+        } catch (e) {
+          logMessage(`Invalid user data: ${userData}`, 'error');
+        }
+      } else {
+        logMessage('No user data in localStorage', 'error');
+      }
+    });
+    
+    // Go to home page - ensure correct path
+    document.getElementById('go-home').addEventListener('click', () => {
+      logMessage('Navigating to home page...', 'info');
+      // Use the correct path - no 'html/' prefix needed
+      window.location.href = 'home.html';
+    });
+  </script>
+</body>
+</html>

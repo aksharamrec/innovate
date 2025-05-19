@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Innovate</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/toast.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body class="app-body">
+    <nav class="app-navbar">
+        <div class="container navbar-container">
+            <div class="navbar-left">
+                <a href="home.html" class="navbar-logo">
+                    <img src="assets/images/innovate-logo.svg" alt="Innovate Logo">
+                    <span>Innovate</span>
+                </a>
+                <div class="navbar-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search..." id="navbarSearch">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-menu">
+                    <a href="home.html" class="navbar-menu-item active">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="messages.html" class="navbar-menu-item">
+                        <i class="fas fa-comment-alt"></i>
+                        <span>Messages</span>
+                    </a>
+                    <a href="communities.html" class="navbar-menu-item">
+                        <i class="fas fa-users"></i>
+                        <span>Communities</span>
+                    </a>
+                    <a href="events.html" class="navbar-menu-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Events</span>
+                    </a>
+                </div>
+                <div class="navbar-user">
+                    <a href="notifications.html" class="navbar-icon-button">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </a>
+                    <div class="dropdown">
+                        <button class="navbar-profile-button dropdown-toggle" id="profileDropdown">
+                            <img src="assets/images/avatars/default.png" alt="Your Profile" class="profile-avatar" id="navbarAvatar">
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                My Profile
+                            </a>
+                            <a href="settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" id="logout-button">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Log Out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="app-main">
+        <div class="container">
+            <div class="content-grid">
+                <!-- Left sidebar -->
+                <div class="sidebar left-sidebar">
+                    <div class="card user-card">
+                        <div class="user-card-header">
+                            <img src="assets/images/avatars/default.png" alt="Profile Picture" class="profile-avatar" id="sidebarAvatar">
+                            <div>
+                                <h3 id="userName">Loading...</h3>
+                                <p id="userTagline">Your headline here</p>
+                            </div>
+                        </div>
+                        <div class="user-card-stats">
+                            <div class="stat-item">
+                                <span class="stat-value" id="profileViewCount">--</span>
+                                <span class="stat-label">Profile views</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" id="postViewCount">--</span>
+                                <span class="stat-label">Post impressions</span>
+                            </div>
+                        </div>
+                        <div class="user-card-actions">
+                            <a href="profile.html" class="btn btn-outline btn-block">
+                                <i class="fas fa-user"></i> View Profile
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card communities-card">
+                        <div class="card-header">
+                            <h2>My Communities</h2>
+                            <a href="communities.html" class="view-all">View All</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="sidebar-communities">
+                                <a href="#" class="sidebar-community">
+                                    <img src="assets/images/communities/tech.png" alt="Tech Innovations" class="community-icon">
+                                    <span>Tech Innovations</span>
+                                </a>
+                                <a href="#" class="sidebar-community">
+                                    <img src="assets/images/communities/design.png" alt="Design Thinkers" class="community-icon">
+                                    <span>Design Thinkers</span>
+                                </a>
+                                <a href="#" class="sidebar-community">
+                                    <img src="assets/images/communities/marketing.png" alt="Digital Marketing" class="community-icon">
+                                    <span>Digital Marketing</span>
+                                </a>
+                            </div>
+                            <button class="btn btn-outline btn-sm btn-block">
+                                <i class="fas fa-compass"></i> Discover Communities
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card events-card">
+                        <div class="card-header">
+                            <h2>Upcoming Events</h2>
+                            <a href="events.html" class="view-all">View All</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="sidebar-events">
+                                <a href="#" class="sidebar-event">
+                                    <div class="event-date">
+                                        <span class="event-month">Oct</span>
+                                        <span class="event-day">15</span>
+                                    </div>
+                                    <div class="event-info">
+                                        <h4>Tech Meetup 2023</h4>
+                                        <p>San Francisco, CA</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="sidebar-event">
+                                    <div class="event-date">
+                                        <span class="event-month">Oct</span>
+                                        <span class="event-day">21</span>
+                                    </div>
+                                    <div class="event-info">
+                                        <h4>AI in Healthcare</h4>
+                                        <p>Virtual Event</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <button class="btn btn-outline btn-sm btn-block">
+                                <i class="fas fa-plus"></i> Create Event
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main feed -->
+                <div class="main-feed">
+                    <div class="create-post-card">
+                        <div class="post-input-container">
+                            <img src="assets/images/avatars/default.png" alt="Your Avatar" id="postAvatarImg" class="post-avatar">
+                            <div class="post-input" id="openCreatePostModal">
+                                <span>Share an idea or project...</span>
+                            </div>
+                        </div>
+                        <div class="post-options">
+                            <button class="post-option" id="photoVideoBtn">
+                                <i class="fas fa-image"></i>
+                                <span>Photo/Video</span>
+                            </button>
+                            <button class="post-option" id="projectBtn">
+                                <i class="fas fa-project-diagram"></i>
+                                <span>Project</span>
+                            </button>
+                            <button class="post-option" id="pollBtn">
+                                <i class="fas fa-poll"></i>
+                                <span>Poll</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="posts-container" id="postFeed">
+                        <!-- Posts will be loaded here -->
+                        <div class="loading-spinner">Loading posts...</div>
+                    </div>
+
+                    <div class="load-more">
+                        <button class="btn btn-outline btn-block" id="loadMoreBtn">
+                            Load More Posts
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Right sidebar -->
+                <div class="sidebar right-sidebar">
+                    <div class="card connections-card">
+                        <div class="card-header">
+                            <h2>Connections</h2>
+                            <a href="#" class="view-all">View All</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="sidebar-connections">
+                                <div class="connection-item">
+                                    <img src="assets/images/avatars/user1.png" alt="Sarah Johnson" class="connection-avatar">
+                                    <div class="connection-info">
+                                        <h4>Sarah Johnson</h4>
+                                        <p>UI/UX Designer</p>
+                                    </div>
+                                </div>
+                                <div class="connection-item">
+                                    <img src="assets/images/avatars/user2.png" alt="Michael Chen" class="connection-avatar">
+                                    <div class="connection-info">
+                                        <h4>Michael Chen</h4>
+                                        <p>Full Stack Developer</p>
+                                    </div>
+                                </div>
+                                <div class="connection-item">
+                                    <img src="assets/images/avatars/user3.png" alt="Alex Rivera" class="connection-avatar">
+                                    <div class="connection-info">
+                                        <h4>Alex Rivera</h4>
+                                        <p>Marketing Specialist</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card suggested-connections-card">
+                        <div class="card-header">
+                            <h2>People You May Know</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="suggested-connections">
+                                <div class="suggested-connection">
+                                    <img src="assets/images/avatars/user4.png" alt="Emily Brown" class="connection-avatar">
+                                    <div class="connection-info">
+                                        <h4>Emily Brown</h4>
+                                        <p>Product Manager at TechCo</p>
+                                        <button class="btn btn-outline btn-sm follow-btn" data-user-id="user4">
+                                            <i class="fas fa-user-plus"></i> Follow
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="suggested-connection">
+                                    <img src="assets/images/avatars/user5.png" alt="David Wilson" class="connection-avatar">
+                                    <div class="connection-info">
+                                        <h4>David Wilson</h4>
+                                        <p>Data Scientist at DataCorp</p>
+                                        <button class="btn btn-outline btn-sm follow-btn" data-user-id="user5">
+                                            <i class="fas fa-user-plus"></i> Follow
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card suggestions-card">
+                        <div class="card-header">
+                            <h2>Suggested Communities</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="suggested-communities">
+                                <div class="suggested-community">
+                                    <img src="assets/images/communities/startup.png" alt="Startup Network" class="community-icon">
+                                    <div class="community-info">
+                                        <h4>Startup Network</h4>
+                                        <p>8.9K members</p>
+                                        <button class="btn btn-outline btn-sm join-btn" data-community-id="startup">
+                                            <i class="fas fa-plus"></i> Join
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="suggested-community">
+                                    <img src="assets/images/communities/coding.png" alt="Coding Wizards" class="community-icon">
+                                    <div class="community-info">
+                                        <h4>Coding Wizards</h4>
+                                        <p>10.5K members</p>
+                                        <button class="btn btn-outline btn-sm join-btn" data-community-id="coding">
+                                            <i class="fas fa-plus"></i> Join
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Create Post Modal -->
+    <div class="modal" id="createPostModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closePostModal">&times;</span>
+            <h3>Create Post</h3>
+            <div class="post-creator-form">
+                <div class="post-creator-header">
+                    <img src="assets/images/avatars/default.png" alt="Your Avatar" id="modalAvatarImg" class="post-avatar">
+                    <div class="post-creator-info">
+                        <h4 id="modalUserName">Your Name</h4>
+                        <select id="postVisibility">
+                            <option value="public">Public</option>
+                            <option value="connections">Connections Only</option>
+                            <option value="private">Private</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="post-content-editor">
+                    <textarea id="postContent" placeholder="What's on your mind?"></textarea>
+                </div>
+                <div id="uploadPreview" class="post-upload-preview"></div>
+                <div class="post-options-row">
+                    <div class="post-options-icons">
+                        <button type="button" class="post-option-btn" id="addPhotoBtn">
+                            <i class="fas fa-image"></i>
+                            <span>Photo</span>
+                        </button>
+                        <button type="button" class="post-option-btn" id="addVideoBtn">
+                            <i class="fas fa-video"></i>
+                            <span>Video</span>
+                        </button>
+                        <button type="button" class="post-option-btn" id="addDocBtn">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Document</span>
+                        </button>
+                        <button type="button" class="post-option-btn" id="addTagBtn">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Tag</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="tagsContainer" class="tags-container" style="display: none;">
+                    <div class="tag-input-container">
+                        <input type="text" id="tagInput" placeholder="Add a tag and press Enter">
+                        <div id="tagsList" class="tags-list"></div>
+                    </div>
+                </div>
+                
+                <button type="button" class="btn btn-primary btn-block" id="submitPost">
+                    Post
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Post Actions Modal -->
+    <div class="modal" id="postActionsModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeActionsModal">&times;</span>
+            <h3 id="actionsModalTitle">Post Options</h3>
+            <div id="actionsModalContent"></div>
+        </div>
+    </div>
+
+    <!-- Toast container for notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Hidden file input for post uploads -->
+    <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.gif,.mp4,.pdf,.doc,.docx" style="display: none;" multiple>
+
+    <script src="js/main.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>

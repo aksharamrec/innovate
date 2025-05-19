@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Path Test</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+    .success { color: green; font-weight: bold; }
+    .error { color: red; font-weight: bold; }
+    code { background: #f5f5f5; padding: 2px 5px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <h1>Path Test Page</h1>
+  <p>This page helps diagnose file path issues.</p>
+  
+  <h2>Path Tests:</h2>
+  <ul id="results"></ul>
+  
+  <div>
+    <h2>Navigation Links:</h2>
+    <ul>
+      <li><a href="home.html">Home Page (home.html)</a></li>
+      <li><a href="home.html">Login Page (home.html)</a></li>
+      <li><a href="direct-login.html">Direct Login (direct-login.html)</a></li>
+      <li><a href="emergency-login.html">Emergency Login (emergency-login.html)</a></li>
+    </ul>
+  </div>
+  
+  <div>
+    <h2>API Test:</h2>
+    <button id="test-api">Test API Connection</button>
+    <pre id="api-result">Click the button to test...</pre>
+  </div>
+  
+  <script>
+    const resultsList = document.getElementById('results');
+    const apiResult = document.getElementById('api-result');
+    
+    // Test if files exist by loading them as images
+    function testPath(path, description) {
+      const img = new Image();
+      const listItem = document.createElement('li');
+      
+      img.onload = () => {
+        listItem.innerHTML = `<span class="success">✓</span> ${description} (<code>${path}</code>)`;
+      };
+      
+      img.onerror = () => {
+        listItem.innerHTML = `<span class="error">✗</span> ${description} (<code>${path}</code>)`;
+      };
+      
+      img.src = path + '?t=' + new Date().getTime();
+      resultsList.appendChild(listItem);
+    }
+    
+    // Test API
+    document.getElementById('test-api').addEventListener('click', async () => {
+      apiResult.textContent = 'Testing API...';
+      
+      try {
+        const response = await fetch('/api/test');
+        const data = await response.json();
+        apiResult.textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        apiResult.textContent = 'Error: ' + error.message;
+      }
+    });
+    
+    // Run tests when page loads
+    window.addEventListener('load', () => {
+      // Test various file paths
+      testPath('home.html', 'Home page');
+      testPath('home.html', 'Login page');
+      testPath('html/home.html', 'Home page in html/ subdirectory');
+      testPath('css/styles.css', 'CSS styles');
+      testPath('js/login.js', 'Login JS');
+    });
+  </script>
+</body>
+</html>

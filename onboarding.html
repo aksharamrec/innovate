@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Innovate - Complete Your Profile</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/onboarding.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="onboarding-container">
+        <div class="onboarding-sidebar">
+            <div class="onboarding-logo">
+                <img src="assets/images/innovate-logo.svg" alt="Innovate Logo">
+                <h1>Innovate</h1>
+            </div>
+            
+            <div class="onboarding-progress">
+                <ul class="progress-steps">
+                    <li class="active" data-step="1"><i class="fas fa-user"></i> <span>Profile</span></li>
+                    <li data-step="2"><i class="fas fa-briefcase"></i> <span>Professional Info</span></li>
+                    <li data-step="3"><i class="fas fa-tags"></i> <span>Interests</span></li>
+                    <li data-step="4"><i class="fas fa-users"></i> <span>Connections</span></li>
+                </ul>
+            </div>
+            
+            <div class="onboarding-help">
+                <p>Need help?</p>
+                <a href="#" class="help-link"><i class="fas fa-question-circle"></i> Contact Support</a>
+            </div>
+        </div>
+        
+        <div class="onboarding-content">
+            <div class="onboarding-header">
+                <h2>Welcome! Let's set up your profile</h2>
+                <p>Complete the following steps to get the most out of Innovate.</p>
+            </div>
+            
+            <!-- Step 1: Profile -->
+            <div class="onboarding-step active" id="step-1">
+                <h3>Basic Information</h3>
+                <p>Let's start with your profile basics.</p>
+                
+                <form id="profile-form" class="onboarding-form">
+                    <div class="avatar-upload-container">
+                        <div class="avatar-preview">
+                            <div id="avatarPreview" style="background-image: url(assets/images/avatars/default.png);"></div>
+                        </div>
+                        <div class="avatar-actions">
+                            <input type="file" id="avatarUpload" accept="image/*" style="display: none;">
+                            <button type="button" class="btn btn-outline" id="uploadAvatarBtn">Upload Photo</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="displayName">Display Name</label>
+                        <input type="text" id="displayName" name="displayName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <div class="input-with-icon">
+                            <span class="input-prefix">@</span>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                        <span class="form-help" id="usernameAvailability"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea id="bio" name="bio" rows="3" placeholder="Tell others a little about yourself"></textarea>
+                        <span class="text-count">0/160</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" name="location" placeholder="City, Country">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline">Skip</button>
+                        <button type="button" class="btn btn-primary next-step" data-next="2">Next</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Step 2: Professional Info -->
+            <div class="onboarding-step" id="step-2">
+                <h3>Professional Information</h3>
+                <p>Tell us about your professional background.</p>
+                
+                <form id="professional-form" class="onboarding-form">
+                    <div class="form-group">
+                        <label for="headline">Professional Headline</label>
+                        <input type="text" id="headline" name="headline" placeholder="e.g., Full Stack Developer at Tech Co.">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="industry">Industry</label>
+                        <select id="industry" name="industry">
+                            <option value="">Select an industry</option>
+                            <option value="tech">Technology</option>
+                            <option value="design">Design</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="finance">Finance</option>
+                            <option value="education">Education</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Skills</label>
+                        <div class="skills-input-container">
+                            <input type="text" id="skillInput" placeholder="Add a skill and press Enter">
+                            <div class="skills-list" id="skillsList"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Experience</label>
+                        <button type="button" class="btn btn-outline btn-sm add-experience-btn" id="addExperienceBtn">
+                            <i class="fas fa-plus"></i> Add Experience
+                        </button>
+                        <div id="experienceList"></div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline prev-step" data-prev="1">Back</button>
+                        <button type="button" class="btn btn-primary next-step" data-next="3">Next</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Step 3: Interests -->
+            <div class="onboarding-step" id="step-3">
+                <h3>Your Interests</h3>
+                <p>Select topics you're interested in to personalize your experience.</p>
+                
+                <form id="interests-form" class="onboarding-form">
+                    <div class="interests-container">
+                        <div class="interest-category">
+                            <h4>Technology</h4>
+                            <div class="interest-options">
+                                <label class="interest-option">
+                                    <input type="checkbox" name="interests" value="web-development">
+                                    <span>Web Development</span>
+                                </label>
+                                <label class="interest-option">
+                                    <input type="checkbox" name="interests" value="mobile-apps">
+                                    <span>Mobile Apps</span>
+                                </label>
+                                <label class="interest-option">
+                                    <input type="checkbox" name="interests" value="artificial-intelligence">
+                                    <span>Artificial Intelligence</span>
+                                </label>
+                                <label class="interest-option">
+                                    <input type="checkbox" name="interests" value="data-science">
+                                    <span>Data Science</span>
+                                </label>
+                                <label class="interest-option">
+                                    <input type="checkbox" name="interests" value="blockchain">
+                                    <span>Blockchain</span>
+                                </label>
+                                <label class="interest-option">
+                                    <input type="checkbox" name="interests" value="cybersecurity">
+                                    <span>Cybersecurity</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="interest-category">
+                            <h4>Design</h4>
+                            <div class="interest-options">
+                                <label class="interest-option">
+                                    <input type="checkbox" name="interests" value="ui-design">
+                                    <span>UI Design</span>
+                                </label>
+                                <label class="interest-option">
+                                    <input type="checkbox" name="interests" value="ux-design">
+                                    <span>UX Design</span>
+                                </label>
+                                <label class="interest-option">
+                                    <input type="checkbox" name="interests" value="graphic-design">
+                                    <span>Graphic Design</span>
+                                </label>
+                                <label class="interest-option">
+                                    <input type="checkbox" name="interests" value="motion-graphics">
+                                    <span>Motion Graphics</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="interest-category">
+                            <h4>Business</h4>
+                            <div class="interest-options">
+                                <label class="interest-option">
+                                    <input type="checkbox" name="interests" value="startups">
+                                    <span>Startups</span>
+                                </label>
+                                <label class="interest-option">
+                                    <input type="checkbox" name="interests" value="marketing">
+                                    <span>Marketing</span>
+                                </label>
+                                <label class="interest-option">
+                                    <input type="checkbox" name="interests" value="entrepreneurship">
+                                    <span>Entrepreneurship</span>
+                                </label>
+                                <label class="interest-option">
+                                    <input type="checkbox" name="interests" value="product-management">
+                                    <span>Product Management</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline prev-step" data-prev="2">Back</button>
+                        <button type="button" class="btn btn-primary next-step" data-next="4">Next</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Step 4: Connections -->
+            <div class="onboarding-step" id="step-4">
+                <h3>Find People to Connect With</h3>
+                <p>Here are some suggested connections based on your profile.</p>
+                
+                <form id="connections-form" class="onboarding-form">
+                    <div class="suggested-connections" id="suggestedConnections">
+                        <!-- Connections will be loaded dynamically -->
+                        <div class="connection-card">
+                            <img src="assets/images/avatars/user1.png" alt="Sarah Johnson" class="connection-avatar">
+                            <div class="connection-info">
+                                <h4>Sarah Johnson</h4>
+                                <p>UI/UX Designer | Product Design</p>
+                                <button type="button" class="btn btn-outline btn-sm follow-btn">
+                                    <i class="fas fa-user-plus"></i> Follow
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="connection-card">
+                            <img src="assets/images/avatars/user2.png" alt="Michael Chen" class="connection-avatar">
+                            <div class="connection-info">
+                                <h4>Michael Chen</h4>
+                                <p>Full Stack Developer | React, Node.js</p>
+                                <button type="button" class="btn btn-outline btn-sm follow-btn">
+                                    <i class="fas fa-user-plus"></i> Follow
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="connection-card">
+                            <img src="assets/images/avatars/user3.png" alt="Alex Rivera" class="connection-avatar">
+                            <div class="connection-info">
+                                <h4>Alex Rivera</h4>
+                                <p>Marketing Specialist | Content Creator</p>
+                                <button type="button" class="btn btn-outline btn-sm follow-btn">
+                                    <i class="fas fa-user-plus"></i> Follow
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Find connections by email</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="findByEmail" placeholder="Enter email address">
+                            <button type="button" class="btn btn-outline btn-sm">Find</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline prev-step" data-prev="3">Back</button>
+                        <button type="button" class="btn btn-primary" id="finishOnboarding">Finish</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Experience Modal -->
+    <div class="modal" id="experienceModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Add Experience</h3>
+            <form id="experienceForm">
+                <div class="form-group">
+                    <label for="jobTitle">Job Title</label>
+                    <input type="text" id="jobTitle" name="jobTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <input type="month" id="startDate" name="startDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">End Date</label>
+                        <input type="month" id="endDate" name="endDate">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="currentJob" name="currentJob">
+                            <label for="currentJob">I currently work here</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="jobDescription">Description</label>
+                    <textarea id="jobDescription" name="jobDescription" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Add Experience</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="js/onboarding.js"></script>
+</body>
+</html>
